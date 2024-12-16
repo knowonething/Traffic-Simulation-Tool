@@ -1,0 +1,47 @@
+{
+  "Characteristic": "Proportion",
+  "Total": 36000,
+  "Nodes": {
+    "A": {
+      "IP": "172.2.41.2",
+      "MAC": "58:fb:84:65:e5:65"
+    },
+    "B": {
+      "IP": "172.2.41.3",
+      "MAC": "58:fb:84:65:e5:66"
+    },
+    "C": {
+      "IP": "172.2.41.4",
+      "MAC": "58:fb:84:65:e5:67"
+    },
+    "D": {
+      "IP": "172.2.41.5",
+      "MAC": "58:fb:84:65:e5:68"
+    }
+  },
+  "Requirements": {
+    "A->C:1": {
+      "Type": "smtp",
+      "Weight": 100,
+      "Delay": 3.14,
+      "Rate": 900
+    },
+    "B->C:1": {
+      "Type": "ftp",
+      "Weight": 205.5,
+      "Delay": 4,
+      "Rate": 300
+    },
+    "C->D:1": {
+      "Type": "pop3",
+      "Weight": 313.123,
+      "Delay": 6.66,
+      "Rate": 600
+    }
+  },
+  "TrafficFile": {
+    "smtp": "!本机保存smtp流量文件的路径!",
+    "ftp": "!本机保存ftp流量文件的路径!",
+    "pop3": "!本机保存pop3流量文件的路径!"
+  }
+}

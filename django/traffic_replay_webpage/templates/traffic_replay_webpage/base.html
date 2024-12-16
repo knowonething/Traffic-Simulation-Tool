@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/entypo.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/css.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/bootstrap.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/neon-core.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/neon-theme.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/neon-forms.css">
+    <link rel="stylesheet" href="{%static 'traffic_replay_webpage/'%}/css/custom.css">
+
+    <script src="{%static 'traffic_replay_webpage/'%}/js/jquery-1.11.0.min.js"></script>
+
+</head>
+<!--页面渐入效果-->
+<body class="page-body page-fade">
+<!--页面可显示的内容-->
+<div class="page-container">
+    <!--侧边栏-->
+    <div class="sidebar-menu">
+        <header class="logo-env">
+            <!--顶层图标-->
+            <div class="logo">
+                <a href="{% url 'traffic_replay_webpage:index' %}">
+                    <img src="{%static 'traffic_replay_webpage/image/LOGO.png'%}" width="150" alt="main page">
+                </a>
+            </div>
+            <!--折叠之后的侧边栏图标-->
+            <div class="sidebar-collapse">
+                <a href="#" class="sidebar-collapse-icon with-animation">
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+            <!--移动端的侧边栏图标-->
+            <div class="sidebar-mobile-menu visible-xs">
+                <a href="#" class="with-animation">
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+        </header>
+        <ul id="main-menu" class="">
+            <li id="search">
+                <form method="get" action="#">
+                    <input type="text" name="search-content" class="search-input" placeholder="搜索相关内容...">
+                    <button type="submit">
+                        <i class="entypo-search"></i>
+                    </button>
+                </form>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="entypo-rocket"></i>
+                    <span>生成流量</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{% url 'traffic_replay_webpage:generate' %}">
+                            <span>生成定制流量</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'traffic_replay_webpage:simulate' %}">
+                            <span>模拟用户行为流量</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{% url 'traffic_replay_webpage:monitor' %}">
+                    <i class="entypo-magnet"></i>
+                    <span>监视流量动态</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'traffic_replay_webpage:manage-files' %}">
+                    <i class="entypo-floppy"></i>
+                    <span>管理配置文件</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="entypo-doc-text"></i>
+                    <span>相关文档</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span>关于生成流量</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>关于监视流量动态</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        {% block main-content %}
+        {% endblock main-content %}
+    </div>
+</div>
+
+{% block modal %}
+<!--提示模态框-->
+<div class="modal fade" id="infoModal" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--标题-->
+            <div class="modal-header">
+                <h4 class="modal-title">内容加载中...</h4>
+            </div>
+            <!--内容-->
+            <div class="modal-body">
+                <div class="scrollable" data-height="240">
+                    <div>
+                        内容加载中...
+                    </div>
+                </div>
+            </div>
+            <!--底部-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--日期选择模态框-->
+<div class="modal fade" id="creationModal" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--标题-->
+            <div class="modal-header">
+                <h4 class="modal-title">选择任务启动日期和时间</h4>
+            </div>
+            <!--内容-->
+            <div class="modal-body">
+                <form role="form" class="form-horizontal form-groups-bordered">
+                    <div class="form-group">
+						<label class="col-sm-3 control-label">文件路径</label>
+						<div class="col-sm-5">
+							<input id="creation-file-name" type="text" class="form-control"  disabled>
+						</div>
+					</div>
+                    <div class="form-group">
+						<label class="col-sm-3 control-label">选择时间</label>
+						<div class="col-sm-3">
+							<input type="text" id="creation-time" class="form-control timepicker" data-template="dropdown" data-show-seconds="true" data-show-meridian="true" data-minute-step="1" data-second-step="1" data-default-time="01:00:00 AM">
+						</div>
+					</div>
+                    <div class="form-group">
+						<label class="col-sm-3 control-label">选择日期</label>
+						<div class="col-sm-3">
+							<input type="text" id="creation-date" class="form-control datepicker">
+						</div>
+					</div>
+                </form>
+            </div>
+            <!--底部-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info">提交请求</button>
+                <button type="button" class="btn btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block foot-source %}
+{% endblock foot-source %}
+</body>
+</html>

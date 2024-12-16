@@ -1,0 +1,33 @@
+{
+  "Servers": {
+    "S1": {
+      "Image_tag": "mysql:latest",
+      "Name": "mysql_server",
+      "Environment": {
+        "MYSQL_ROOT_PASSWORD": "123321",
+        "MYSQL_USER": "yzf",
+        "MYSQL_PASSWORD": "123321",
+        "MYSQL_DATABASE": "YZF_DATA"
+      },
+      "Remove": true
+    }
+  },
+  "Clients": {
+    "C1": {
+      "Image_tag": "my-mysql-connector-python:latest",
+      "Name": "mysql_client",
+      "Environment": {
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "123321",
+        "MYSQL_IP": "####S1",
+        "MYSQL_DATABASE": "YZF_DATA"
+      },
+      "Command": "python /usr/src/main.py",
+      "Volume":[
+        "!本机的路径!:/usr/src/"
+      ],
+      "Network": "bridge",
+      "Remove": true
+    }
+  }
+}

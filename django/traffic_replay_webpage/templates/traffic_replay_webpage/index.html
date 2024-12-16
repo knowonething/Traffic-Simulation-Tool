@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+
+{% block title %}流量管理系统{% endblock %}
+
+{% block main-content %}
+<ol class="breadcrumb bc-3">
+    <li class="active">
+        <a href="{% url 'traffic_replay_webpage:index' %}">
+            <i class="entypo-home"></i>主页
+        </a>
+    </li>
+</ol>
+{% endblock %}
+
+{% block foot-source %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'traffic_replay_webpage/' %}/css/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="{% static 'traffic_replay_webpage/' %}/css/rickshaw.min.css">
+
+<script src="{% static 'traffic_replay_webpage/' %}/js/main-gsap.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-ui-1.10.3.minimal.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/bootstrap.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/joinable.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/resizeable.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-api.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-jvectormap-europe-merc-en.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery.sparkline.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/d3.v3.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/rickshaw.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/raphael-min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/morris.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/toastr.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-chat.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-custom.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-demo.js"></script>
+{% endblock %}

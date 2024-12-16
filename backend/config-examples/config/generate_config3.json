@@ -1,0 +1,32 @@
+{
+  "Servers": {
+    "S1": {
+      "Image_tag": "linuxserver/openssh-server:latest",
+      "Name": "sshd-server",
+      "Environment": {
+        "PASSWORD_ACCESS": "true",
+        "USER_NAME": "yzf",
+        "USER_PASSWORD": "123456"
+      },
+      "Remove": true
+    }
+  },
+  "Clients": {
+    "C1": {
+      "Image_tag": "my-paramiko-python:latest",
+      "Name": "ssh_client",
+      "Environment": {
+        "SERVER_HOST": "####S1",
+        "USERNAME": "yzf",
+        "PASSWORD": "123456",
+        "SERVER_PORT": 2222
+      },
+      "Command": "python /usr/src/main.py",
+      "Volume": [
+        "!本机的路径!:/usr/src/"
+      ],
+      "Network": "bridge",
+      "Remove": true
+    }
+  }
+}

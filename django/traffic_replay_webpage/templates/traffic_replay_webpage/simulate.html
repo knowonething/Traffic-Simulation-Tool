@@ -1,0 +1,149 @@
+{% extends "./base.html" %}
+
+{% block title %}模拟用户行为流量{% endblock %}
+
+{% block main-content %}
+<ol class="breadcrumb bc-3">
+    <li>
+        <a href="{% url 'traffic_replay_webpage:index' %}">
+            <i class="entypo-home"></i>主页
+        </a>
+    </li>
+    <li>
+        生成流量
+    </li>
+    <li class="active">
+        <a href="{% url 'traffic_replay_webpage:generate' %}">
+            <strong>模拟用户行为流量</strong>
+        </a>
+    </li>
+</ol>
+<h2>模拟用户行为流量</h2>
+<table class="table table-bordered datatable" id="info-table">
+    <thead>
+    <tr class="replace-inputs">
+        <th>任务ID</th>
+        <th>配置文件</th>
+        <th>任务状态</th>
+        <th>指令</th>
+    </tr>
+    <tr>
+        <th>任务ID</th>
+        <th>配置文件</th>
+        <th>任务状态</th>
+        <th>指令</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>任务ID</th>
+        <th>配置文件</th>
+        <th>任务状态</th>
+        <th>指令</th>
+    </tr>
+    </tfoot>
+</table>
+<script type="text/javascript">
+jQuery(document).ready(function($)
+{
+    let table = $("#info-table").dataTable({
+        "sPaginationType": "bootstrap",
+        "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "bStateSave": true,
+        "bProcessing": true,
+    });
+    table.columnFilter({
+        "sPlaceHolder" : "head:after"
+    });
+    redraw_info_table("{% url 'traffic_replay_webpage:get-tasks' %}", "{% url 'traffic_replay_webpage:index' %}", "simulate")
+});
+</script>
+<table class="table table-bordered datatable" id="config-table">
+    <thead>
+    <tr class="replace-inputs">
+        <th>配置文件</th>
+        <th>创建日期</th>
+        <th>文件描述</th>
+        <th>指令</th>
+    </tr>
+    <tr>
+        <th>配置文件</th>
+        <th>创建日期</th>
+        <th>文件描述</th>
+        <th>指令</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>config.sh</td>
+        <td>2022-22-22</td>
+        <td>
+            改文件没有描述信息。
+        </td>
+        <td>
+            <button type="button" class="btn btn-default btn-icon icon-left"><i class="entypo-right"></i>创建任务</button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>配置文件名称</th>
+        <th>创建日期</th>
+        <th>文件描述</th>
+        <th>指令</th>
+    </tr>
+    </tfoot>
+</table>
+<script type="text/javascript">
+jQuery(document).ready(function($)
+{
+    let table = $("#config-table").dataTable({
+        "sPaginationType": "bootstrap",
+        "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "bStateSave": true,
+        "bProcessing": true,
+    });
+    table.columnFilter({
+        "sPlaceHolder" : "head:after"
+    });
+    redraw_config_table("{% url 'traffic_replay_webpage:get-configs' %}", "{% url 'traffic_replay_webpage:index' %}", "simulate")
+    bind_creation_modal_submit()
+});
+
+</script>
+{% endblock %}
+
+{% block foot-source %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'traffic_replay_webpage/' %}/css/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="{% static 'traffic_replay_webpage/' %}/css/rickshaw.min.css">
+
+<script src="{% static 'traffic_replay_webpage/' %}/js/main-gsap.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-ui-1.10.3.minimal.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/bootstrap.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/joinable.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/resizeable.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-api.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery-jvectormap-europe-merc-en.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery.sparkline.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/TableTools.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/dataTables.bootstrap.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/jquery.dataTables.columnFilter.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/lodash.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/datatables.responsive.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/d3.v3.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/rickshaw.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/raphael-min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/morris.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/toastr.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-chat.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-custom.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/neon-demo.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/bootstrap-datepicker.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/bootstrap-timepicker.min.js"></script>
+<script src="{% static 'traffic_replay_webpage/' %}/js/myscript.js"></script>
+{% endblock %}

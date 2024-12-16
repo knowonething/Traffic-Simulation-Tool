@@ -1,0 +1,31 @@
+{
+  "Proto": {
+    "http": {
+      "Ports": [80]
+    },
+    "ftp": {
+      "Ports": [21, 20]
+    },
+    "pop3": {
+      "Ports": [110]
+    },
+    "imap": {
+      "Ports": [143]
+    },
+    "smtp": {
+      "Ports": [25]
+    },
+    "mysql": {
+      "Ports": [3306]
+    },
+    "telnet":{
+      "Ports": [23]
+    },
+    "ssh":{
+      "Ports": [2222]
+    }
+  },
+  "Time": 180,
+  "Interval": 3,
+  "Interfaces": ["docker0", "enp0s3"]
+}

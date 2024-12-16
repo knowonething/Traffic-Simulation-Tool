@@ -1,0 +1,36 @@
+{
+  "Servers": {
+    "S1": {
+      "Image_tag": "fauria/vsftpd:latest",
+      "Name": "ftpd_server",
+      "Environment": {
+        "FTP_USER": "yzf",
+        "FTP_PASS": "123456",
+        "PASV_ADDRESS": "127.0.0.1",
+        "PASV_MIN_PORT": "21100",
+        "PASV_MAX_PORT": "21110"
+      },
+      "Volume":[
+        "!本机的路径!:/home/vsftpd"
+      ],
+      "Remove": true
+    }
+  },
+  "Clients": {
+    "C1": {
+      "Image_tag": "python:3.8.0",
+      "Name": "ftp_client",
+      "Environment": {
+        "SERVER_HOST": "####S1",
+        "USERNAME": "yzf",
+        "PASSWORD": "123456"
+      },
+      "Command": "python /usr/src/ftplib_client.py",
+      "Volume":[
+        "!本机的路径!:/usr/src/"
+      ],
+      "Network": "bridge",
+      "Remove": true
+    }
+  }
+}

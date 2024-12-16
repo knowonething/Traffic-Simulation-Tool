@@ -1,0 +1,25 @@
+{
+  "Servers": {
+    "S1": {
+      "Image_tag": "httpd:latest",
+      "Name": "http_server",
+      "Remove": true
+    }
+  },
+  "Clients": {
+    "C1": {
+      "Image_tag": "my-requests-python:latest",
+      "Name": "http_client",
+      "Environment": {
+        "SERVER_HOST": "####S1"
+      },
+      "Command": "python /usr/src/main.py",
+      "Volume":[
+        "!本机的路径!:/usr/src/"
+      ],
+      "Network": "bridge",
+      "Remove": true
+    }
+  },
+  "duration": 60
+}

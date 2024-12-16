@@ -1,0 +1,26 @@
+{
+  "Servers": {
+    "S1": {
+      "Image_tag": "wistic/telnetd:latest",
+      "Name": "telnetd_server",
+      "Remove": true
+    }
+  },
+  "Clients": {
+    "C1": {
+      "Image_tag": "python:3.8.0",
+      "Name": "telnet_client",
+      "Environment": {
+        "SERVER_HOST": "####S1",
+        "USERNAME": "user",
+        "PASSWORD": "password"
+      },
+      "Command": "python /usr/src/telnetlib_client.py",
+      "Volume":[
+        "!本机的路径!:/usr/src/"
+      ],
+      "Network": "bridge",
+      "Remove": true
+    }
+  }
+}
